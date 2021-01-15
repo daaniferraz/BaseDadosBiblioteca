@@ -1,0 +1,107 @@
+create database BaseDadosBiblioteca
+Create table Biblioteca
+
+(
+    id_biblioteca int  not null primary key ,
+    descricaoBiblioteca varchar(30),
+    enderecoBiblioteca varchar(30)
+	
+)
+Create table Associado
+
+(
+    id_associado int not null primary key,
+    nomeAssociado varchar(30),
+    sexo char(1)
+	
+)
+Create table Livro
+
+(
+    id_livro int not null primary key,
+    isbn varchar(30),
+    tituloLivro varchar(30),
+    statusLivro char(1)
+	
+)
+Create table Assunto
+
+(
+    id_assunto int not null primary key,
+    descricaoAssunto varchar(30)
+	
+)
+Create table Autor
+
+(
+    id_autor int not null primary key,
+    nomeAutor varchar(30)
+	
+)
+Create table Emprestimo
+
+(
+     id_associado int FOREIGN KEY REFERENCES associado(id_associado),
+     id_livro	  int FOREIGN KEY REFERENCES livro ( id_livro)
+	
+)
+Create table LivroAssunto
+
+(
+     id_assunto int FOREIGN KEY REFERENCES assunto(id_assunto),
+     id_livro	  int FOREIGN KEY REFERENCES livro (id_livro)
+	
+)
+Create table LivroAutor
+
+(
+     id_autor int FOREIGN KEY REFERENCES autor(id_autor),
+     id_livro	  int FOREIGN KEY REFERENCES livro (id_livro)
+	
+)
+create table BibliotecaAssociado(
+
+     id_associado int FOREIGN KEY REFERENCES associado(id_associado),
+     id_biblioteca  int FOREIGN KEY REFERENCES biblioteca()id_biblioteca
+
+)
+create table BibliotecaAssociado(
+
+     id_associado int FOREIGN KEY REFERENCES associado(id_associado),
+     id_biblioteca int FOREIGN KEY REFERENCES biblioteca(id_biblioteca)
+
+)
+
+INSERT INTO BibliotecaAssociado VALUES (1,1)
+INSERT INTO BibliotecaAssociado VALUES (2,1)
+INSERT INTO BibliotecaAssociado VALUES (3,2)
+INSERT INTO BibliotecaAssociado VALUES (4,2)
+
+
+
+INSERT INTO Biblioteca(id_biblioteca, descricaoBiblioteca, enderecoBiblioteca) 
+VALUES (1, 'Biblioteca Maria Algusta', 'Rua A'),
+(2, 'Biblioteca Jose Roberto', 'Rua B');
+
+
+INSERT INTO Associado(id_associado, nomeAssociado, sexo) 
+VALUES (1, 'Maria Algusta', 'F'),
+(2, 'Jose', 'M'),
+(3, 'Roberto', 'M'),
+(4, 'Ana', 'F');
+
+INSERT INTO Emprestimo(id_associado,id_livro) 
+VALUES (1, 2),
+(2,5),
+(3, 3),
+(4, 1),
+(4,4);
+
+INSERT INTO Livro(id_livro,isbn,tituloLivro,statusLivro) 
+VALUES (1, '9999999999','livro 1',1),
+(2,'9999999999','livro 2',1),
+(3, '9999999999','livro 3',1),
+(4, '9999999999','livro 4',1),
+(5,'9999999999','livro 5',1);
+
+
